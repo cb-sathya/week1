@@ -15,8 +15,8 @@ class EmployeeDetails{			//class that stores the employee details and calculates
 		this.gender=gender;
 		this.income=income;
 	}
-	
-	static void calculate(char gender,double income){
+			//The static class that calculates the tax amount to be paid by considering the gender and the total income
+	static void calculate(char gender,double income){	
 		if(gender=='M'||gender=='m'){
 			if(income>500000){
 				taxAmount=(20*income)/100;
@@ -38,7 +38,7 @@ class EmployeeDetails{			//class that stores the employee details and calculates
 		}
 	}		
 	
- 	void display(){
+ 	void display(){		//Prints the final report with the names and tax amounts to be paid
 		System.out.println(name+" | "+ gender+" | "+income+" | "+taxAmount);
 	}
 }	
@@ -51,6 +51,7 @@ class Taxcalc{
 		double income;
 		String choice;
 		ArrayList<EmployeeDetails> emplist =new ArrayList<EmployeeDetails>();
+			//The  details of the employee are entered
 		do{
 			System.out.println("Enter the details of the employee (Name,gender,income)");
 			name=scanner.next();
@@ -62,7 +63,7 @@ class Taxcalc{
 			System.out.println("Do you want to continue? (y/n)");
 			choice=scanner.next();
 		}while(choice.equalsIgnoreCase("y"));
-		
+			//The tax amounts are calculated and displayed
 		for(EmployeeDetails ed: emplist){
 			ed.calculate(ed.gender,ed.income);			
 			ed.display();

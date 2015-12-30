@@ -1,10 +1,11 @@
-
-
+/**
+*This class implements an application to print the report card of a student.It receives the student details with the marks scored in the exams as input and prints the report card with the average marks and total marks
+*/
 
 
 import java.util.Scanner;
 
-class Student{
+class Student{				//This class contains the get and set methods to store and retrieve the genral student details
 	int studentId;
 	String studentName;
 	boolean gender;
@@ -55,7 +56,7 @@ class Student{
 	}
 }
 
-class Subject{
+class Subject{			//This class contains the get and set methods to store and retrieve the subject and mark details 
 	Scanner scanner=new Scanner(System.in);
 	String subject1;
 	float marks1;
@@ -114,7 +115,7 @@ class Subject{
 }
 
 
-class ResultGenerator{
+class ResultGenerator{				//This class generates the report card by printing the details of the students and the marks scored in each subject with the average and total marks
 	static void generateResult(Student student){
 		System.out.println("--------REPORT CARD--------");
 		System.out.println("STUDENT ID: \t"+student.getStudentId());
@@ -127,7 +128,7 @@ class ResultGenerator{
 	}
 }
 
-class StudentDemo{
+class StudentDemo{				
 	void storeStudentData(Student student){
 
 		System.out.println("Enter the student ID");
