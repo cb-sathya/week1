@@ -6,31 +6,31 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-abstract class Animals implements Type,Mobility{
+abstract class Animals implements Type,Mobility{	     //the base class that contains methods to print the name of the animal and the mode of locomotion
 	abstract void movement();
 	abstract void printName();
 }
 
-abstract class Mammal extends Animals{
+abstract class Mammal extends Animals{				//contains the subclasses ie animals that are mammals
 	abstract void movement();
 	abstract void printName();
 }
-	
-abstract class Bird extends Animals{
-	abstract void movement();
+		
+abstract class Bird extends Animals{				//contains the subclasses ie animals that are birds
+	abstract void movement();		
 	abstract void printName();
 }
 	
-interface Type{
+interface Type{							//interface for asserting herbivorous nature
 	String isHerbivore();
 }
 
-interface Mobility{
+interface Mobility{						//interface for asserting the ability to fly
 	String canFly();
 }
 
-
-class Bat extends Mammal implements Type,Mobility{
+	
+class Bat extends Mammal implements Type,Mobility{		//sub class bat derived from class mammal and implements the two interfaces
 	void movement(){
 		System.out.println("Bats are carnivorous mammals that can fly");
 	}
@@ -46,7 +46,7 @@ class Bat extends Mammal implements Type,Mobility{
 }
 
 
-class Dog extends Mammal implements Type,Mobility{
+class Dog extends Mammal implements Type,Mobility{		//sub class dog derived from class mammal and implements the two interfaces
 	void movement(){
 		System.out.println("dogs are carnivorous mammals that walks");
 	}
@@ -61,7 +61,7 @@ class Dog extends Mammal implements Type,Mobility{
 	}
 }
 
-class Cow extends Mammal implements Type,Mobility{
+class Cow extends Mammal implements Type,Mobility{		//sub class cow derived from class mammal and implements the two interfaces
 	void movement(){
 		System.out.println("cows are herbivorous mammals that walks");
 	}
@@ -76,7 +76,7 @@ class Cow extends Mammal implements Type,Mobility{
 	}
 }
 
-class Ostrich extends Bird implements Type,Mobility{
+class Ostrich extends Bird implements Type,Mobility{		//sub class Ostrich derived from class bird and implements the two interfaces
 	void movement(){
 		System.out.println("Ostriches are herbivorous birds that cannot fly");
 	}
@@ -91,7 +91,7 @@ class Ostrich extends Bird implements Type,Mobility{
 	}
 }
 	
-class Parrot extends Bird implements Type,Mobility{
+class Parrot extends Bird implements Type,Mobility{		//sub class parrot derived from class bird and implements the two interface
 	void movement(){
 		System.out.println("Parrots are herbivorous birds that can fly");
 	}
@@ -112,6 +112,7 @@ class Animalslist{
 		ArrayList<Animals> animals =new ArrayList <Animals>(); 
 		Scanner scanner=new Scanner(System.in);
 		do{
+								//animals are added
 			System.out.println("Enter the animal that you want to add(parrot,ostrich,cow,dog,bat)");
 			choice=scanner.next();
 			switch(choice){
@@ -138,19 +139,19 @@ class Animalslist{
 			continueList=scanner.next();
 		}while(continueList.equalsIgnoreCase("yes"));
 		
-
+								//displays the mode of locomotion of animals added
 		System.out.println("\n\n\nThe mode of locomotion of the animals entered");
 		for(Animals anim: animals){
 			anim.movement();
 		}
-		
+								//displays the herbivorous animals added
 		System.out.println("\n\n\nAll the animals entered that are herbivores:");
 		for(Animals anim:animals){
 			if(anim.isHerbivore().equals("yes")){
 				anim.printName();
 			}
 		}
-
+								//displays the animals added that can fly
 		System.out.println("\n\n\nAll the animals that can fly:");
 		for(Animals anim: animals){
 			if(anim.canFly().equals("yes")){

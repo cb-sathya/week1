@@ -2,7 +2,7 @@
 This class implements an application that uses inheritance to keep track of available cars
 */
 
-class Car{
+class Car{							//the base class car contains common info like speed,color and regular price
 	int speed;
 	double regularPrice;
 	String color;
@@ -19,7 +19,7 @@ class Car{
 	}
 }
 
-class Truck extends Car{
+class Truck extends Car{					//subclass truck derived from car
 	int weight;
 	Truck(int speed,double regularPrice,String color,int weight){
 		super(speed,regularPrice,color);
@@ -38,7 +38,7 @@ class Truck extends Car{
 	}
 }
 
-class Ford extends Car{
+class Ford extends Car{							//subclass ford derived from car
 	int year;
 	int manufacturerDiscount;
 	Ford(int speed,double regularPrice,String color,int year,int manufacturerDiscount){
@@ -54,7 +54,7 @@ class Ford extends Car{
 	}
 }
 
-class Sedan extends Car{
+class Sedan extends Car{						//subclass sedan derived from car
 	int length;
 	Sedan(int speed,double regularPrice,String color,int length){
 		super(speed,regularPrice,color);
@@ -68,19 +68,20 @@ class Sedan extends Car{
 			return (super.getSalePrice()-(super.getSalePrice()*10)/100);
 		}
 	}
-	void Display(){
+	void Display(){						//method to display the details of the cars added
 	System.out.println("Ford with speed "+super.speed+" km/hr at a price of Rs."+super.regularPrice+" painted "+super.color+" available at a discounted price of Rs."+getSalePrice()+"\n");
 	}
 }
 
 class MyOwnAutoShop{
 	public static void main(String args[]){
+							
+		Sedan sedan =new Sedan(100,1000000,"black",25);		//adds a new sedan to the shop
+		Ford ford1=new Ford(180,2500000,"blue",1995,10);	//adds a new ford to the shop
+		Ford ford2=new Ford(130,1500000,"red",1991,15);		//adds a new ford to the shop
+		Car car=new Car(100,500000,"white");			//adds a new car to the shop
 		
-		Sedan sedan =new Sedan(100,1000000,"black",25);
-		Ford ford1=new Ford(180,2500000,"blue",1995,10);
-		Ford ford2=new Ford(130,1500000,"red",1991,15);
-		Car car=new Car(100,500000,"white");
-		
+					//displays the cars added
 		sedan.Display();
 		ford1.Display();
 		ford2.Display();

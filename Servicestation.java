@@ -76,7 +76,7 @@ class Vehicle{						//class Vehicle contains all the details of the vehicle
 	}
 }
 
-class Invoice{				//contains invoice details
+class Invoice{						//class to store invoice details
 	String nameOfOwner;
 	Vehicle vehicle;
 	double totalAmount;
@@ -87,7 +87,7 @@ class Invoice{				//contains invoice details
 		this.vehicle=vehicle;
 		totalAmount=vehicle.serviceCharge*2;
 	}
-	void toDisplay(){
+	void toDisplay(){				//method to display invoices
 		System.out.println("Name of Owner:  "+nameOfOwner+"\nVehicle Details:  ");
 		vehicle.toDisplay();
 		System.out.print("\nAssigned Employee:  "+assingedEmployee+"\nTotalAmount:  Rs."+totalAmount);
@@ -101,8 +101,8 @@ class Invoice{				//contains invoice details
 		return assingedEmployee;
 	}
 }
-
-class Servicestation{
+		
+class Servicestation{					
 	public static void main(String args[]){
 		ArrayList <Invoice> invoices=new ArrayList<Invoice>();
 		ArrayList <Customer> customers=new ArrayList<Customer>();
@@ -120,15 +120,15 @@ class Servicestation{
 	
 			choice=scanner.nextInt();
 			switch(choice){
-				case 1:	
+				case 1:				//user wants to add a new customer
 					System.out.println("Enter name,age,contact,customerId");
 					customers.add(new Customer(scanner.next(),scanner.nextInt(),scanner.nextLong(),scanner.nextInt()));
 					break;
-				case 2:
+				case 2:				//user wants to add a new employee
 					System.out.println("Enter name,age,contact,empId");
 					employees.add(new Employee(scanner.next(),scanner.nextInt(),scanner.nextLong(),scanner.nextInt()));
 					break;
-				case 3:
+				case 3:				//user wants to create a new invoice
 					System.out.println("Enter vehicle brand");
 					vehicleBrand=scanner.next();
 					System.out.println("Enter color of vehicle");
@@ -144,12 +144,15 @@ class Servicestation{
 					break;
 			}	
 		}while(choice<4);
-	
+							//displays the service charges of all the vehicles that are currently added
+		System.out.println("\n\n\nVEHICLES IN THE STATION WITH THEIR SERVICE CHARGES:");
 		for(Vehicle v: vehicles){
 			v.displayServiceCharge();
 		}
 		
-		for(Employee emp:employees){
+
+		System.out.println("\n\n\nEMPLOYEES IN THE STATION WITH THEIR INVOICES:");
+		for(Employee emp:employees){		//displays the names of the employees with their invoices
 			emp.toDisplay();
 			int i=0;
 			System.out.println("INVOICES");
@@ -163,13 +166,16 @@ class Servicestation{
 				System.out.println("NONE");
 			}
 		}
-
-		for(Customer customer:customers){
+		
+		System.out.println("\n\n\nCURRENT CUSTOMERS WITH THEIR INVOICES:");
+		for(Customer customer:customers){	//displays the names of the customer with the invoices in which they are included
+			System.out.println();	
 			customer.toDisplay();
 			int i=0;
-			System.out.println("INVOICES");	
+			System.out.println("\nINVOICES");	
 			for(Invoice invoice:invoices){
 				if(customer.getName().equalsIgnoreCase(invoice.getNameOfOwner())){
+					System.out.println();
 					invoice.toDisplay();
 					i++;	
 				}
