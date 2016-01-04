@@ -1,33 +1,33 @@
 /**
 *This pattern class implements an application that display the specified pattern
-*    1
-*   121
-*  12321
-* 1234321
+*       1
+*     1 2 1
+*   1 2 3 2 1
+* 1 2 3 4 3 2 1
 */
 import java.util.Scanner;
 class Pattern{
 	public static void main(String args[]){
-		int row,inc,dec,space,control,input;
+		int row,inc,space,control,input;
 		Scanner scanner=new Scanner(System.in);
 		System.out.println("Enter the number of rows");
-		input=scanner.nextInt();
+		input=scanner.nextInt()+1;
 		for(row=1;row<=input;row++){					//controls number of rows
 			space=input-row;
-			inc=1;					
-			for(control=1;control<=input;control++){  		 	
+			inc=0;					
+			for(control=1;control<input||inc>1;control++){  		 	
 				if(control<=space){				//prints space
 					System.out.print("  ");
 				}
-				else{						//prints the left half of the pattern
+				else if(control<input){			//prints the left half of the pattern
+					inc++;	
 					System.out.print(inc+" ");
-					inc++;
+				}
+				else{					//printd the right half of the pattern
+					inc--;
+					System.out.print(inc+" ");
 				}
 					
-			}
-				
-	 		for(dec=inc-2;dec>0;dec--){   				//prints the right half of the pattern
-				System.out.print(dec+" ");
 			}
 			System.out.println();
 		}
