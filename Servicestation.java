@@ -26,19 +26,35 @@ class Employee extends Person{		//class Employee inherits members of Person clas
 		super(name,age,contact);
 		this.empId=empId;
 	}
+	
 	void toDisplay(){
-		System.out.println("EmployeeID:  "+empId);
-		super.toDisplay();
+		if(empId!=0){
+			System.out.println("\nEmployeeID:  "+empId);
+		}
+			super.toDisplay();
+	}
+	int getEmpId(){
+		return empId;
 	}
 	String getName(){
-		return super.name;
+		return name;
+	}
+	int getAge(){
+		return age;
+	}
+	long getContact(){
+		return contact;
 	}
 }
 
-class Customer extends Person{		//class Customer inherits members of Person class and contains the customerID
+class Customer extends Employee{		//class Customer inherits members of Person class and contains the customerID
 	int customerId;
 	Customer(String name,int age,long contact,int customerId){
-		super(name,age,contact);
+		super(name,age,contact,0);
+		this.customerId=customerId;
+	}
+	Customer(String name,int age,long contact,int customerId,int empId){
+		super(name,age,contact,empId);
 		this.customerId=customerId;
 	}
 	void toDisplay(){
@@ -46,7 +62,7 @@ class Customer extends Person{		//class Customer inherits members of Person clas
 		super.toDisplay();
 	}
 	String getName(){
-		return super.name;
+		return name;
 	}
 }
 
@@ -62,17 +78,20 @@ class Vehicle{						//class Vehicle contains all the details of the vehicle
 		switch(service){
 			case "bike":
 				serviceCharge=200;
+				break;
 			case "car":
 				serviceCharge=1000;
+				break;
 			case "bus":
 				serviceCharge=3000;
+				break;
 		}
 	}
 	void toDisplay(){				//method to display the vehicle details
 		System.out.print("Brand:"+brand+"\t"+"color:"+color+"\t"+"service:"+service+"\t"+"Service Charge:"+serviceCharge);
 	}
 	void displayServiceCharge(){			//Displays servcice charge of all vehicles
-		System.out.println("Type:  "+service+"  ServiceCharge:  "+serviceCharge);
+		System.out.println("Type:  "+service+"  ServiceCharge:  "+serviceCharge+"\n");
 	}
 }
 
@@ -90,7 +109,7 @@ class Invoice{						//class to store invoice details
 	void toDisplay(){				//method to display invoices
 		System.out.println("Name of Owner:  "+nameOfOwner+"\nVehicle Details:  ");
 		vehicle.toDisplay();
-		System.out.print("\nAssigned Employee:  "+assingedEmployee+"\nTotalAmount:  Rs."+totalAmount);
+		System.out.print("\nAssigned Employee:  "+assingedEmployee+"\nTotalAmount:  Rs."+totalAmount+"\n");
 	}
 
 	String getNameOfOwner(){
@@ -102,32 +121,51 @@ class Invoice{						//class to store invoice details
 	}
 }
 		
-class Servicestation{					
+class Servicestation{		
+	
 	public static void main(String args[]){
 		ArrayList <Invoice> invoices=new ArrayList<Invoice>();
 		ArrayList <Customer> customers=new ArrayList<Customer>();
 		ArrayList <Employee> employees=new ArrayList<Employee>();
 		ArrayList <Vehicle> vehicles=new ArrayList<Vehicle>();
-		String vehicleColor,vehicleBrand,vehicleService;
+		String vehicleColor,vehicleBrand,vehicleService;	
+		int empId,cusId;			
 
+	
 		Scanner scanner=new Scanner(System.in);
 		int choice;
+		String cusChoice;
 		do{
-			System.out.println("1.ADD CUSTOMER");
-			System.out.println("2.ADD EMPLOYEE");
-			System.out.println("3.ADD INVOICE");
+			System.out.println("1.ADD EMPLOYEE");
+			System.out.println("2.ADD CUSTOMER");
+			System.out.println("3.ADD VEHICLE");
 			System.out.println("4.EXIT\n");
 	
 			choice=scanner.nextInt();
 			switch(choice){
-				case 1:				//user wants to add a new customer
-					System.out.println("Enter name,age,contact,customerId");
-					customers.add(new Customer(scanner.next(),scanner.nextInt(),scanner.nextLong(),scanner.nextInt()));
-					break;
-				case 2:				//user wants to add a new employee
+				case 1:				//user wants to add a new employee
 					System.out.println("Enter name,age,contact,empId");
 					employees.add(new Employee(scanner.next(),scanner.nextInt(),scanner.nextLong(),scanner.nextInt()));
-					break;
+					break;				
+				case 2:				//user wants to add a new customer
+					System.out.println("Is the customer an employee?(yes/no)");
+					cusChoice=scanner.next();
+					if(cusChoice.equalsIgnoreCase("yes")){
+						System.out.println("Enter empId");
+						empId=scanner.nextInt();
+						System.out.println("Enter cusId");
+						cusId=scanner.nextInt();
+						for(Employee e:employees){
+							if(e.getEmpId()==empId){
+								customers.add(new Customer(e.getName(),e.getAge(),e.getContact(),cusId,empId));
+							}	
+						}
+					}		
+					else{
+						System.out.println("Enter name,age,contact,customerId");
+						customers.add(new Customer(scanner.next(),scanner.nextInt(),scanner.nextLong(),scanner.nextInt()));
+					}
+					break;			
 				case 3:				//user wants to create a new invoice
 					System.out.println("Enter vehicle brand");
 					vehicleBrand=scanner.next();
@@ -155,7 +193,7 @@ class Servicestation{
 		for(Employee emp:employees){		//displays the names of the employees with their invoices
 			emp.toDisplay();
 			int i=0;
-			System.out.println("INVOICES");
+			System.out.println("\nINVOICES");
 			for(Invoice invoice:invoices){
 				if(emp.getName().equalsIgnoreCase(invoice.getNameOfEmployee())){
 					invoice.toDisplay();
